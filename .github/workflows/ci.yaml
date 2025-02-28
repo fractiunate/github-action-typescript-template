@@ -30,7 +30,7 @@ jobs:
 
       - name: Run Pre-Buil;d
         id: prebuild
-        run: npm prebuild
+        run: npm run prebuild
 
       - name: Install Dependencies
         id: npm-ci
