@@ -23,7 +23,7 @@
     "node": ">=20"
   },
   "scripts": {
-    "prebuild": "cat package.json | jq .typescriptConfig > tsconfig.json",
+    "prebuild": "cat package.json | jq .typescriptConfig > tsconfig.json && cat package.json | jq .typescriptConfigBase >  tsconfig.base.json && cat package.json | jq .typescriptConfigEslint > tsconfig.eslint.json",
     "postbuild": "rm tsconfig.json",
     "ci-test": "cross-env NODE_OPTIONS=--experimental-vm-modules NODE_NO_WARNINGS=1 npx jest",
     "local-action": "npx @github/local-action . src/main.ts .env",
@@ -54,6 +54,50 @@
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "*"
   },
+  "typescriptConfigEslint": {
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "./tsconfig.base.json",
+    "compilerOptions": {
+      "allowJs": true,
+      "noEmit": true
+    },
+    "exclude": [
+      "dist",
+      "node_modules"
+    ],
+    "include": [
+      "__fixtures__",
+      "__tests__",
+      "src",
+      "eslint.config.mjs",
+      "jest.config.js",
+      "rollup.config.ts"
+    ]
+  },
+  "typescriptConfigBase": {
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "declaration": true,
+      "declarationMap": false,
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "lib": [
+        "ES2022"
+      ],
+      "module": "NodeNext",
+      "moduleResolution": "NodeNext",
+      "newLine": "lf",
+      "noImplicitAny": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": false,
+      "pretty": true,
+      "resolveJsonModule": true,
+      "strict": true,
+      "strictNullChecks": true,
+      "target": "ES2022"
+    }
+  },
   "typescriptConfig": {
     "$schema": "https://json.schemastore.org/tsconfig",
     "extends": "./tsconfig.base.json",
@@ -62,7 +106,15 @@
       "moduleResolution": "NodeNext",
       "outDir": "./dist"
     },
-    "exclude": ["__fixtures__", "__tests__", "coverage", "dist", "node_modules"],
-    "include": ["src"]
+    "exclude": [
+      "__fixtures__",
+      "__tests__",
+      "coverage",
+      "dist",
+      "node_modules"
+    ],
+    "include": [
+      "src"
+    ]
   }
 }

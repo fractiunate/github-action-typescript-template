@@ -1,5 +1,7 @@
 # build-files
 tsconfig.json
+tsconfig.base.json
+tsconfig.lint.json
 
 # Logs
 logs

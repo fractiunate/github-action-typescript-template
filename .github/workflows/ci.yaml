@@ -28,6 +28,10 @@ jobs:
           node-version: '20.9.0'
           cache: npm
 
+      - name: Run Pre-Buil;d
+        id: prebuild
+        run: npm prebuild
+
       - name: Install Dependencies
         id: npm-ci
         run: npm ci
