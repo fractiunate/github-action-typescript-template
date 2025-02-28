@@ -1,0 +1,22 @@
+name: Github Typescript Action
+description: >
+  A github action written in Typescript.
+author: Fractiunate.me
+
+branding:
+  icon: settings
+  color: blue
+
+inputs:
+  input:
+    description: "An example input."
+    required: true
+    default: "Hello, World!"
+
+outputs:
+  output1:
+    description: "An example output."
+
+runs:
+  using: node20
+  main: dist/index.js
